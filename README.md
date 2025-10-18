@@ -1,6 +1,8 @@
 # AgroInsightX_Chatbot
 ---
 # AgroInsightX_Chatbot: Fine-Tuned BERT for Agricultural Question Answering
+--
+## [Demo Video](https://youtu.be/BsqZBagZlQI)
 
 ## 1. Project Overview
 AgroInsightX is a specialized Question Answering (QA) chatbot developed to assist farmers and agricultural enthusiasts by providing quick and accurate information on agricultural topics. This project fine-tunes a **BERT-based model** on a custom dataset of agriculture-specific questions and answers to create a domain-focused QA system.
