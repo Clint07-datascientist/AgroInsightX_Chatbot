@@ -17,6 +17,14 @@ The model is trained on the **Agriculture QA** dataset, sourced from a local Par
 | **Data Fields** | `question`, `answers` (used as context/source for answer extraction) |
 | **Data Split** | 90% Training, 10% Validation (2,262 examples) |
 
+![Image](https://github.com/user-attachments/assets/5001bba9-c9f6-487c-b7a3-cf8c28317b5f)
+
+![Image](https://github.com/user-attachments/assets/31dc79c2-e458-4340-a3e9-72b14e8e192b)
+
+![Image](https://github.com/user-attachments/assets/66d8ee5c-9f92-40d5-ae40-f0533d6453bf)
+
+![Image](https://github.com/user-attachments/assets/91a97f93-ab9f-4ff0-88f6-ea247a29015e)
+
 ## 3. Model Architecture and Training
 The project uses the Hugging Face `transformers` library to fine-tune a pre-trained language model.
 
