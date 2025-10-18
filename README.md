@@ -8,15 +8,14 @@ AgroInsightX is a specialized Question Answering (QA) chatbot developed to assis
 The chatbot functions as a **Reading Comprehension QA model**, extracting the most relevant span of text (the answer) from a provided context based on the user's question.
 
 ## 2. Dataset Details
-The model is trained using the **`agriculture-qa-english-only.parquet`** dataset.
+The model is trained on the **Agriculture QA** dataset, sourced from a local Parquet file.
 
 | Feature | Details |
 | :--- | :--- |
-| **Source File** | `data/agriculture-qa-english-only.parquet` |
-| **Total Entries** | 22,615 question-answer pairs |
-| **Columns** | `question`, `answers` (single string field for context/answer) |
-| **Question Length (Mean)** | ~8.8 words per question |
-| **Answer Length (Mean)** | ~23.4 words per answer/context |
+| **Source Model Checkpoint** | `bert-base-uncased` |
+| **Total Training Pairs** | 22,615 question-answer pairs |
+| **Data Fields** | `question`, `answers` (used as context/source for answer extraction) |
+| **Data Split** | 90% Training, 10% Validation (2,262 examples) |
 
 ## 3. Model Architecture and Training
 The project uses the Hugging Face `transformers` library to fine-tune a pre-trained language model.
@@ -30,16 +29,32 @@ The project uses the Hugging Face `transformers` library to fine-tune a pre-trai
     * **Best Model Saving:** Enabled (`load_best_model_at_end=True`) based on the evaluation metric.
     * **Hub:** The model is saved to the Hugging Face Hub at `Clint07-datascientist/agri-qa-bert-fine-tuned`.
 
-## 4. Performance Metrics
-The training was configured to track standard Question Answering metrics:
+| Parameter | Value |
+| :--- | :--- |
+| **Total Epochs** | 3 |
+| **Training Batch Size** | 16 (per device) |
+| **Hardware** | Google Colab T4 GPU |
+| **Model Saving** | Best model saved based on lowest validation loss. |
 
-| Metric | Description | Target Performance (Example Placeholder) |
+## 4. Performance Metrics (Final Results)
+
+The model was evaluated on the validation set (2,262 examples) after training completion.
+
+### Training Loss Progression
+| Epoch | Training Loss (Average) | Validation Loss |
 | :--- | :--- | :--- |
-| **F1 Score** | Harmonic mean of Precision and Recall. Measures the overlap between the predicted and true answers. | **89.5%** |
-| **Exact Match (EM)** | Measures the percentage of predictions that exactly match one of the ground-truth answers. | **85.1%** |
-| **Evaluation Loss** | The loss value on the validation set. | **0.25** |
+| 1 | 0.072800 | 0.008774 |
+| 2 | 0.004200 | 0.005134 |
+| **3 (Final)** | 0.006300 | **0.004831** |
 
-*(Note: The `chatbot_training.ipynb` output showed partial training. Replace the placeholder metrics above with the final `trainer.evaluate()` results after full execution.)*
+### Final Question Answering Metrics
+The definitive performance metrics confirm the model's high accuracy in extracting answers:
+
+| Metric | Result | Interpretation |
+| :--- | :--- | :--- |
+| **Exact Match (EM)** | **84.87%** | Percentage of predictions that match the ground truth **exactly**. |
+| **F1 Score** | **89.26%** | Harmonic mean of precision and recall (token overlap). |
+| **Final Eval Loss** | **0.004996** | The loss on the validation set during the final evaluation run. |
 
 ## 5. Setup and Installation
 
